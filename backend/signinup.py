@@ -11,7 +11,7 @@ def signin():
     data=request.get_json()
     userId = data['userId']
     password = data['password']
-    conn = psycopg2.connect(host="localhost", dbname="E-Hub", user="postgres", password="sbskln2412S", port=5432)
+    conn = psycopg2.connect(host="localhost", dbname="E-Hub", user="postgres", password="your db password", port=5432)
     cur = conn.cursor()
     cur.execute("select * from Login")
     rows= cur.fetchall()
