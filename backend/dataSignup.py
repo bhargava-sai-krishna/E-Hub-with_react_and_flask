@@ -1,7 +1,7 @@
 import psycopg2
 
 def addClient(userName, password, email, company):
-    conn = psycopg2.connect(host="localhost", dbname="E-Hub", user="postgres", password="sbskln2412S", port=5432)
+    conn = psycopg2.connect(host="localhost", dbname="E-Hub", user="postgres", password="your db password", port=5432)
     conn.autocommit = True
     cur = conn.cursor()
     cur.execute('select * from client')
