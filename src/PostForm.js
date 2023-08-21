@@ -13,6 +13,7 @@ class PostForm extends Component {
       password: '',
       userRole: '', 
       signup: 'False',
+      name: ""
     };
   }
 
@@ -32,24 +33,24 @@ class PostForm extends Component {
     axios
       .post('http://127.0.0.1:5000/signin', JSON.parse(stateJson))
       .then((response) => {
-        console.log(response.data);
-        if (response.data !== 'False') {
-          const userId = this.state.userId;
-          if (response.data.charAt(0) === 'C' || userId.charAt(0)==='c' || userId.charAt(0)==='C') 
-          {
-            this.setState({ userRole: 'client' }); 
-          } 
-          else if (response.data.charAt(0) === 'A'||userId.charAt(0)==='a' || userId.charAt(0)==='A') 
-          {
-            this.setState({ userRole: 'admin' });
-          } 
-          else if (response.data.charAt(0) === 'E'||userId.charAt(0)==='e' || userId.charAt(0)==='A') 
-          {
-            this.setState({ userRole: 'employee' });
-          }
-        } 
-        else 
+        console.log(response.data.flag);
+        if (response.data.flag !== 'False') 
         {
+          const userId = this.state.userId;
+          const jsonData = response.data;
+          if (jsonData.flag.charAt(0) === 'C' || userId.charAt(0) === 'c' || userId.charAt(0) === 'C') 
+          {
+            this.setState({ userRole: 'client', name: jsonData.name });
+          } 
+          else if (jsonData.flag.charAt(0) === 'A' || userId.charAt(0) === 'a' || userId.charAt(0) === 'A') 
+          {
+            this.setState({ userRole: 'admin', name: jsonData.name });
+          } 
+          else if (jsonData.flag.charAt(0) === 'E' || userId.charAt(0) === 'e' || userId.charAt(0) === 'A') 
+          {
+            this.setState({ userRole: 'employee', name: jsonData.name });
+          }
+        } else {
           console.log('Enter correct details');
         }
       })
@@ -57,15 +58,21 @@ class PostForm extends Component {
         console.log(error);
       });
   };
+  
 
   render() {
-    const { userId, password, userRole, signup } = this.state;
-    if (userRole === 'client') {
-      return <Client />;
-    } else if (userRole === 'admin') {
-      return <Admin />;
-    } else if (userRole === 'employee') {
-      return <Employee />;
+    const { userId, password, userRole, signup, name } = this.state;
+    if (userRole === 'client') 
+    {
+      return <Client userId={userId} name={name}/>;
+    } 
+    else if (userRole === 'admin') 
+    {
+      return <Admin userId={userId} name={name}/>;
+    } 
+    else if (userRole === 'employee') 
+    {
+      return <Employee userId={userId} name={name}/>;
     }
     if(signup === "True")
     {
