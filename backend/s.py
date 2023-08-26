@@ -1,5 +1,5 @@
 host="localhost"
 dbname="E-Hub" 
 user="postgres" 
-password="sbskln2412S"
+password="please keep your DB password here"
 port=5432
