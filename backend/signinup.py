@@ -9,6 +9,11 @@ import getNewProjid
 import TableCreator
 import s
 import ClientTableCreator
+import UpdateTableData
+import getTableForClient
+import projLedByEmp
+import ToEditLog
+import EditDetials
 
 app = Flask(__name__)
 CORS(app)
@@ -81,6 +86,41 @@ def assignProjectByClient():
     projData=request.get_json()
     ClientTableCreator.createTable(projData)
     return 'done'
+
+
+@app.route('/UpdateProjectData',methods=['GET','POST'])
+def updates():
+    updateData=request.get_json()
+    UpdateTableData.fun(updateData)
+    return 'done'
+
+
+@app.route('/getProjectForEmployee',methods=['GET','POST'])
+def getProjectForEmployee():
+    idJSON=request.get_json()
+    id=idJSON['EmpId']
+    return jsonify(getTableForClient.fun(id))
+
+@app.route('/getProjectLedByEmployee',methods=['GET','POST'])
+def getProjectLedByEmployee():
+    idJSON=request.get_json()
+    id=idJSON['EmpId']
+    return jsonify(projLedByEmp.fun(id))
+
+@app.route('/getProjectForEmployeeToEditLog',methods=['GET','POST'])
+def getProjectForEmployeeToEditLog():
+    idJSON=request.get_json()
+    id=idJSON['EmpId']
+    return jsonify(ToEditLog.fun(id))
+
+@app.route('/EditTheseDetailsByEmployee',methods=['GET','POST'])
+def editTheseDetails():
+    dataJSon=request.get_json()
+    projectId=dataJSon['project_id']
+    editedLog=dataJSon['editedLog']
+    EditDetials.fun(projectId,editedLog)
+    return 'done'
+
 
 
 if __name__ == "__main__":

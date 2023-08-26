@@ -6,5 +6,6 @@ def createTable(data):
     conn.autocommit = True
     cur = conn.cursor()
     cur.execute(f"insert into project values(\'{data['projectId']}\',\'{data['clientId']}\',\'{data['projectName']}\',\'{data['projectLog']}\',\'{data['domain']}\',\'EMP001\')")
+    cur.execute(f"insert into project_team values(\'{data['projectId']}\',\'EMP000\',\'NA\')")
     cur.close()
     conn.close()
