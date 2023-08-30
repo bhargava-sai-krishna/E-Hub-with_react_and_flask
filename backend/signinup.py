@@ -14,6 +14,12 @@ import getTableForClient
 import projLedByEmp
 import ToEditLog
 import EditDetials
+import GetClientListForAdmin
+import GetProjectTeam
+import UpdaterProjectIntDB
+import getEmpDets
+import IWillRemoveThisEmployee
+import createerOfEmployee
 
 app = Flask(__name__)
 CORS(app)
@@ -121,7 +127,46 @@ def editTheseDetails():
     EditDetials.fun(projectId,editedLog)
     return 'done'
 
+@app.route('/GetClientList',methods=['GET','POST'])
+def getClientDetailsForAdmin():
+    return jsonify(GetClientListForAdmin.fun())
 
+@app.route('/GetTeamDetails',methods=['GET','POST'])
+def getProjDetailsForAdmin():
+    return jsonify(GetProjectTeam.fun())
+
+@app.route('/UpdateProjDetsInDB',methods=['GET','POST'])
+def ToUpdateInDB():
+    dataJSON=request.get_json()
+    project_id=dataJSON['project_id']
+    project_leader=dataJSON['project_leader']
+    members=dataJSON['members']
+    UpdaterProjectIntDB.fun(project_id,project_leader,members)
+    return 'done'
+
+@app.route('/getEmployeeListToEdit',methods=['GET','POST'])
+def GetOnlyEmployeeDetailsToEdit():
+    return jsonify(getEmpDets.fun())
+
+@app.route('/RemoveEmployee',methods=['GET','POST'])
+def RemoveThisEmployee():
+    dataJson=request.get_json()
+    emp_id=dataJson['emp_id']
+    email=dataJson['email']
+    name=dataJson['name']
+    IWillRemoveThisEmployee.fun(emp_id,name,email)
+    return 'done'
+
+@app.route('/CreateNewEmployee',methods=['GET','POST'])
+def CreateEmployee():
+    dataJson=request.get_json()
+    name=dataJson['name']
+    email=dataJson['email']
+    password=dataJson['password']
+    date=dataJson['dateOfJoin']
+    experience=dataJson['experience']
+    createerOfEmployee.fun(name,email,password,date,experience)
+    return 'done'
 
 if __name__ == "__main__":
     app.run(debug=True)

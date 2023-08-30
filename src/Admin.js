@@ -3,6 +3,7 @@ import PostForm from './PostForm';
 import AdminListProjects from './AdminListProjects';
 import AdminListClient from './AdminListClient';
 import AdminListEmployee from './AdminListEmployee';
+import TeamManager from './TeamManager';
 
 class Admin extends Component {
   constructor(props) {
@@ -14,7 +15,8 @@ class Admin extends Component {
       name:props.name,
       view_project:false,
       view_client:false,
-      view_employee:false
+      view_employee:false,
+      view_team_manager:false
     }
   }
 
@@ -22,7 +24,8 @@ class Admin extends Component {
     this.setState({
       view_project:true,
       view_client:false,
-      view_employee:false
+      view_employee:false,
+      view_team_manager:false
     })
    }
 
@@ -30,7 +33,8 @@ class Admin extends Component {
     this.setState({
       view_project:false,
       view_client:true,
-      view_employee:false
+      view_employee:false,
+      view_team_manager:false
     })
    }
 
@@ -38,16 +42,25 @@ class Admin extends Component {
     this.setState({
       view_project:false,
       view_client:false,
-      view_employee:true
+      view_employee:true,
+      view_team_manager:false
     })
    }
 
+   Team_manager_handler=(e)=>{
+    this.setState({
+      view_project:false,
+      view_client:false,
+      view_employee:false,
+      view_team_manager:true
+    })
+   }
 
   logouter = (e) => {
     this.setState({ loggedIn: false });
   };
   render() {
-    const { loggedIn, userId, name, view_project, view_client,view_employee } = this.state;
+    const { loggedIn, userId, name, view_project, view_client,view_employee,view_team_manager } = this.state;
     return (
       <div>
         {loggedIn?(
@@ -56,11 +69,12 @@ class Admin extends Component {
             <button onClick={this.employee_view_handler}>Manage Employee</button>
             <button onClick={this.client_view_handler}>Manage Client</button>
             <button onClick={this.project_view_handler}>Manage Project</button>
-            <button>Manage Teams</button>
+            <button onClick={this.Team_manager_handler}>Manage Teams</button>
             <button onClick={this.logouter}>Logout</button>
             {view_project && <AdminListProjects userId={userId}/> }
-            {view_client && <AdminListClient /> }
-            {view_employee && <AdminListEmployee /> }
+            {view_client && <AdminListClient userId={userId}/> }
+            {view_employee && <AdminListEmployee userId={userId}/> }
+            {view_team_manager && <TeamManager userId={userId}/>}
           </div>
         ):(<PostForm/>)}
       </div>
