@@ -1,11 +1,10 @@
 import './App.css';
-import PostForm from './PostForm';
-import Signup from './Signup';
+import Home from './Home';
 
 function App() {
   return (
     <div className="App">
-      <Signup />
+      <Home />
     </div>
   );
 }
