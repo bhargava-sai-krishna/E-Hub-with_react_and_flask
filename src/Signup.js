@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import PostForm from './PostForm';
+import './SignUpStyles.css'
 
 export class Signup extends Component {
     constructor(props) {
@@ -38,31 +39,38 @@ export class Signup extends Component {
         return <PostForm />
     }
     return (
-      <div>
-        <form onSubmit={this.submitHandler} action='POSTS'>
-          <div>
-            <p>Enter name</p>
-            <input type='text' name='userName' value={userName} onChange={this.changeHandler} />
-          </div>
-          <div>
-            <p>company name</p>
-            <input type='text' name='company' value={company} onChange={this.changeHandler} />
-          </div>
-          <div>
-            <p>Email</p>
-            <input type='text' name='email' value={email} onChange={this.changeHandler} />
-          </div>
-          <div>
-            <p>Enter password</p>
-            <input type='text' name='password' value={password} onChange={this.changeHandler} />
-          </div>
-          <div>
-            <button type='submit'>Submit</button>
-          </div>
-      </form>
-      <div>
-        <button onClick={this.toPostForm}>Signin</button>
-      </div>
+      <div className='something'>
+          <div className='box'>
+          <form onSubmit={this.submitHandler} action='POSTS' className='wrapper'>
+            <h2>Signup</h2>
+            <div className='inputbox'>
+              <input type='text' name='userName' value={userName} onChange={this.changeHandler}/>
+              <span>Enter Name</span>
+              <i></i>
+            </div>
+            <div className='inputbox'>
+              <input type='text' name='company' value={company} onChange={this.changeHandler} />
+              <span>Enter Company</span>
+              <i></i>
+            </div>
+            <div className='inputbox'>
+              <input type='text' name='email' value={email} onChange={this.changeHandler} />
+              <span>Enter Email</span>
+              <i></i>
+            </div>
+            <div className='inputbox'>
+              <input type='password' name='password' value={password} onChange={this.changeHandler} />
+              <span>Enter Password</span>
+              <i></i>
+            </div>
+            <div > 
+              <button type='submit' className="SubmitButton">Submit</button>
+            </div>
+            <div>
+              <button onClick={this.toPostForm} className="SubmitButton">Signin</button>
+            </div>
+        </form>
+        </div>
       </div>
     )
   }

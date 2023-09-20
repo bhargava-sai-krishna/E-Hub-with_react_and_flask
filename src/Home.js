@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Signup from './Signup';
 import PostForm from './PostForm';
+import './HomeStyles.css'
 
 export class Home extends Component {
   state = {
@@ -23,13 +24,22 @@ export class Home extends Component {
         return <Signup />;
       default:
         return (
-          <div>
-            Welcome to E-Hub web site
-            what do you want to do?
-            present user:
-            <button onClick={this.signinHandler}>sign in</button>
-            new user:
-            <button onClick={this.signupHandler}>sign up</button> 
+          <div className='banner'>
+            <div className='navbar'>
+              <img src='logo.png' className='logoImage' alt='logo'></img>
+              <ul>
+                <li><button onClick={this.signupHandler}>Signup</button></li>
+                <li><button onClick={this.signinHandler}>Signin</button></li>
+              </ul>
+            </div>
+            <div className='content'>
+              <h1>Order Your Website</h1>
+              <p>Make your websites easily and ready to use</p>
+              <div>
+                <button onClick={this.signupHandler}><span></span>Signup</button>
+                <button onClick={this.signinHandler}><span></span>Signin</button>
+              </div>
+            </div>
           </div>
         );
     }
