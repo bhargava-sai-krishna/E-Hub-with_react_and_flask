@@ -8,7 +8,7 @@ function AdminListEmployee() {
   const [showCreateEmployee, setShowCreateEmployee] = useState(false);
 
   const getEmployeeList = () => {
-    axios.post('/getEmployeeListToEdit')
+    axios.post('https://bhargavasaikrishna.pythonanywhere.com/getEmployeeListToEdit')
       .then((response) => {
         console.log(JSON.parse(response.data));
         setEmployeeData(JSON.parse(response.data));
