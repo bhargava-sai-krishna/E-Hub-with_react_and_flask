@@ -8,7 +8,7 @@ function AdminListEmployee() {
   const [showCreateEmployee, setShowCreateEmployee] = useState(false);
 
   const getEmployeeList = () => {
-    axios.post('http://127.0.0.1:5000/getEmployeeListToEdit')
+    axios.post('/getEmployeeListToEdit')
       .then((response) => {
         console.log(JSON.parse(response.data));
         setEmployeeData(JSON.parse(response.data));
@@ -20,7 +20,7 @@ function AdminListEmployee() {
 
   const handleEdit = (row) => {
     console.log(row)
-    axios.post('http://127.0.0.1:5000/RemoveEmployee',JSON.parse(JSON.stringify(row))).then((response)=>{
+    axios.post('/RemoveEmployee',JSON.parse(JSON.stringify(row))).then((response)=>{
       console.log(response.data)
     }).catch((error)=>{
       console.log(error);
