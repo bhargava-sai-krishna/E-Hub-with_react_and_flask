@@ -19,7 +19,7 @@ function AdminListProjects(props) {
 
     useEffect(() => {
         const getTable = () => {
-            axios.post('/getProjectForAdmin', { userId })
+            axios.post('https://bhargavasaikrishna.pythonanywhere.com/getProjectForAdmin', { userId })
                 .then((response) => {
                     setProjectData(JSON.parse(response.data));
                 })
@@ -31,7 +31,7 @@ function AdminListProjects(props) {
     }, [userId]);
 
     const getEmployeeList = () => {
-        axios.post('/getEmployeeListDropDown')
+        axios.post('https://bhargavasaikrishna.pythonanywhere.com/getEmployeeListDropDown')
             .then((response) => {
                 setEmployeeData(JSON.parse(response.data));
             });
