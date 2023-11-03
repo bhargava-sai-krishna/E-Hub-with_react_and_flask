@@ -19,7 +19,7 @@ function AdminListProjects(props) {
 
     useEffect(() => {
         const getTable = () => {
-            axios.post('http://127.0.0.1:5000/getProjectForAdmin', { userId })
+            axios.post('/getProjectForAdmin', { userId })
                 .then((response) => {
                     setProjectData(JSON.parse(response.data));
                 })
@@ -31,7 +31,7 @@ function AdminListProjects(props) {
     }, [userId]);
 
     const getEmployeeList = () => {
-        axios.post('http://127.0.0.1:5000/getEmployeeListDropDown')
+        axios.post('/getEmployeeListDropDown')
             .then((response) => {
                 setEmployeeData(JSON.parse(response.data));
             });
@@ -56,7 +56,7 @@ function AdminListProjects(props) {
           membersString:membersString
         }
         const updatesJSON=JSON.stringify(updates);
-        axios.post('http://127.0.0.1:5000/UpdateProjectData',JSON.parse(updatesJSON)).then((response)=>{
+        axios.post('/UpdateProjectData',JSON.parse(updatesJSON)).then((response)=>{
           console.log(response.data)
         }).catch((error)=>{
           console.log(error)
