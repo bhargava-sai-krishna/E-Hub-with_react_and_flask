@@ -12,7 +12,7 @@ function TeamManager(props) {
 
   useEffect(() => {
     const getTeamList = () => {
-      axios.post('http://127.0.0.1:5000/GetTeamDetails').then((response) => {
+      axios.post('/GetTeamDetails').then((response) => {
         setProjectData(JSON.parse(response.data));
       }).catch((error) => {
         console.log(error);
@@ -22,7 +22,7 @@ function TeamManager(props) {
   }, [AdmId])
 
   const getEmployeeList = () => {
-    axios.post('http://127.0.0.1:5000/getEmployeeListDropDown')
+    axios.post('/getEmployeeListDropDown')
       .then((response) => {
         setEmployeeData(JSON.parse(response.data));
       });
@@ -58,7 +58,7 @@ function TeamManager(props) {
       members:editedMembers.join(',')
     }
     const updatesJSON=JSON.stringify(updates);
-    axios.post('http://127.0.0.1:5000/UpdateProjDetsInDB',JSON.parse(updatesJSON)).then((response)=>{
+    axios.post('/UpdateProjDetsInDB',JSON.parse(updatesJSON)).then((response)=>{
       console.log(response.data)
     }).catch((error)=>{
       console.log(error);
