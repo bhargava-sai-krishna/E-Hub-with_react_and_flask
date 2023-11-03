@@ -9,7 +9,7 @@ function ProjectStatus(props) {
 
     useEffect(() => {
         const getTable = () => {
-            axios.post('/getProjectForEmployeeToEditLog', { EmpId })
+            axios.post('https://bhargavasaikrishna.pythonanywhere.com/getProjectForEmployeeToEditLog', { EmpId })
                 .then((response) => {
                     setProjectData(JSON.parse(response.data));
                 })
@@ -36,7 +36,7 @@ function ProjectStatus(props) {
           editedLog:editedLog
         }
         const PostingDataJson=JSON.stringify(PostingData);
-        axios.post('/EditTheseDetailsByEmployee',JSON.parse(PostingDataJson)).then((response)=>{
+        axios.post('https://bhargavasaikrishna.pythonanywhere.com/EditTheseDetailsByEmployee',JSON.parse(PostingDataJson)).then((response)=>{
           console.log(response.data)
         }).catch((error)=>{
           console.log(error)
