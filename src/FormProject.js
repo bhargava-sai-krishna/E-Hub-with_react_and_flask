@@ -30,7 +30,7 @@ const FormProject = (props) => {
         projectLog,
         domain,
     };
-    axios.post('http://127.0.0.1:5000/AssignProjectByClient', formData)
+    axios.post('/AssignProjectByClient', formData)
     .then((response) => {
       console.log(response.data);
       setProjectName('');
