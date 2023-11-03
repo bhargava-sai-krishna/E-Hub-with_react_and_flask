@@ -7,7 +7,7 @@ function LeadingProjectByEmployee(props) {
 
     useEffect(() => {
         const getTable = () => {
-            axios.post('http://127.0.0.1:5000/getProjectLedByEmployee', { EmpId })
+            axios.post('/getProjectLedByEmployee', { EmpId })
                 .then((response) => {
                     setProjectData(JSON.parse(response.data));
                 })
