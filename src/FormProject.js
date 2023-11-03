@@ -11,7 +11,7 @@ const FormProject = (props) => {
   const [domain, setDomain] = useState('');
 
   const getProjId = () => {
-    axios.post('http://127.0.0.1:5000/getNewProjectId').then((response) => {
+    axios.post('/getNewProjectId').then((response) => {
       console.log(response.data);
       setProjectId(response.data);
     });
