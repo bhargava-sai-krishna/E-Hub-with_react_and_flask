@@ -11,7 +11,7 @@ const FormProject = (props) => {
   const [domain, setDomain] = useState('');
 
   const getProjId = () => {
-    axios.post('/getNewProjectId').then((response) => {
+    axios.post('https://bhargavasaikrishna.pythonanywhere.com/getNewProjectId').then((response) => {
       console.log(response.data);
       setProjectId(response.data);
     });
@@ -30,7 +30,7 @@ const FormProject = (props) => {
         projectLog,
         domain,
     };
-    axios.post('/AssignProjectByClient', formData)
+    axios.post('https://bhargavasaikrishna.pythonanywhere.com/AssignProjectByClient', formData)
     .then((response) => {
       console.log(response.data);
       setProjectName('');
