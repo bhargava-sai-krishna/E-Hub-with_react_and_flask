@@ -24,7 +24,7 @@ function CreateForm() {
             projectLeader,
             teammates: teammates.join(',')
         };
-        axios.post('http://127.0.0.1:5000/AssignProject', formData)
+        axios.post('/AssignProject', formData)
         .then((response) => {
           console.log(response.data);
           setClientId('');
@@ -39,14 +39,14 @@ function CreateForm() {
     }
 
     const getProjId = () => {
-      axios.post('http://127.0.0.1:5000/getNewProjectId').then((response) => {
+      axios.post('/getNewProjectId').then((response) => {
         console.log(response.data);
         setProjectId(response.data);
       });
     }
 
     const getEmployeeList = () => {
-        axios.post('http://127.0.0.1:5000/getEmployeeListDropDown')
+        axios.post('/getEmployeeListDropDown')
         .then((response) => {
             console.log("API Response:", response.data);
             setEmployeeData(JSON.parse(response.data));
