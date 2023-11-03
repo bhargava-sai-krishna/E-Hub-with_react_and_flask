@@ -21,7 +21,7 @@ export class Signup extends Component {
         e.preventDefault();
         console.log(this.state);
         const stateJson = JSON.stringify(this.state);
-        axios.post('http://127.0.0.1:5000/signup',JSON.parse(stateJson)).then((response)=>{
+        axios.post('https://bhargavasaikrishna.pythonanywhere.com/signup',JSON.parse(stateJson)).then((response)=>{
             console.log(response.data);
 
         }).catch((error)=>{
