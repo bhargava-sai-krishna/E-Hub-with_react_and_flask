@@ -7,7 +7,7 @@ function LeadingProjectByEmployee(props) {
 
     useEffect(() => {
         const getTable = () => {
-            axios.post('/getProjectLedByEmployee', { EmpId })
+            axios.post('https://bhargavasaikrishna.pythonanywhere.com/getProjectLedByEmployee', { EmpId })
                 .then((response) => {
                     setProjectData(JSON.parse(response.data));
                 })
