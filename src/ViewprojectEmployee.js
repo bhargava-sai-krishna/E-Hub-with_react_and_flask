@@ -7,7 +7,7 @@ function ViewprojectEmployee(props) {
 
     useEffect(() => {
         const getTable = () => {
-            axios.post('/getProjectForEmployee', { EmpId })
+            axios.post('https://bhargavasaikrishna.pythonanywhere.com/getProjectForEmployee', { EmpId })
                 .then((response) => {
                     setProjectData(JSON.parse(response.data));
                 })
