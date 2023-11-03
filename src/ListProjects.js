@@ -12,7 +12,7 @@ const ListProjects = (props) => {
   useEffect(() => {
     const getTable = () => {
       console.log('hi');
-      axios.post('/getProject', {userId})
+      axios.post('https://bhargavasaikrishna.pythonanywhere.com/getProject', {userId})
         .then((response) => {
           console.log(response);
           setProjectData(JSON.parse(response.data));
