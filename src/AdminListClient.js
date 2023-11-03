@@ -7,7 +7,7 @@ function AdminListClient(props) {
 
     useEffect(() => {
         const GetCLientList = () => {
-            axios.post('http://127.0.0.1:5000/GetClientList', { AdmId }).then((response) => {
+            axios.post('/GetClientList', { AdmId }).then((response) => {
                 console.log(response.data);
                 setClientData(JSON.parse(response.data));
             }).catch((error) => {
