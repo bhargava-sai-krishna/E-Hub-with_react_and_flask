@@ -24,7 +24,7 @@ function CreateForm() {
             projectLeader,
             teammates: teammates.join(',')
         };
-        axios.post('/AssignProject', formData)
+        axios.post('https://bhargavasaikrishna.pythonanywhere.com/AssignProject', formData)
         .then((response) => {
           console.log(response.data);
           setClientId('');
@@ -39,14 +39,14 @@ function CreateForm() {
     }
 
     const getProjId = () => {
-      axios.post('/getNewProjectId').then((response) => {
+      axios.post('https://bhargavasaikrishna.pythonanywhere.com/getNewProjectId').then((response) => {
         console.log(response.data);
         setProjectId(response.data);
       });
     }
 
     const getEmployeeList = () => {
-        axios.post('/getEmployeeListDropDown')
+        axios.post('https://bhargavasaikrishna.pythonanywhere.com/getEmployeeListDropDown')
         .then((response) => {
             console.log("API Response:", response.data);
             setEmployeeData(JSON.parse(response.data));
