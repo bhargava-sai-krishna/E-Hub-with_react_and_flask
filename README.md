@@ -1,5 +1,5 @@
 E-Hub-with_react_and_flask
-As of now deployment is still not done but it will soon be finished and then the link will be posted here
+The hosting is now totally complete link for website https://e-hub-with-react-and-flask.vercel.app/
 
 
 https://github.com/bhargava-sai-krishna/E-Hub-with_react_and_flask/assets/100348267/9cc99b7b-3a89-458c-a898-bd3eab85a1dd
