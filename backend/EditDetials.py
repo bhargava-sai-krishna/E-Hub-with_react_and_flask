@@ -1,10 +1,15 @@
-import psycopg2
+import MySQLdb as mysql
 import s
 
-def fun(project_id,editedLog):
-    conn = psycopg2.connect(host=s.host, dbname=s.dbname, user=s.user, password=s.password, port=s.port)
-    conn.autocommit = True
+def fun(project_id, editedLog):
+    conn = mysql.connect(
+        host=s.host,
+        user=s.user,
+        passwd=s.password,
+        db=s.dbname,
+    )
+    conn.autocommit(True)
     cur = conn.cursor()
-    cur.execute(f"update project set project_log=\'{editedLog}\' where project_id=\'{project_id}\'")
+    cur.execute(f"UPDATE project SET project_log = '{editedLog}' WHERE project_id = '{project_id}'")
     cur.close()
     conn.close()

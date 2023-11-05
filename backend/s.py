@@ -1,5 +1,4 @@
-host="localhost"
-dbname="E-Hub" 
-user="postgres" 
+host="BhargavaSaiKrishna.mysql.pythonanywhere-services.com"
+dbname="BhargavaSaiKrish$postgres"
+user="BhargavaSaiKrish"
 password="sbskln2412S"
-port=5432

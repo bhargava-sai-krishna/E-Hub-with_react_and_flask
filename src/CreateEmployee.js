@@ -25,7 +25,7 @@ function CreateEmployee() {
         experience:yearsOfExperience
     }
     const dataJson=JSON.stringify(data);
-    axios.post('http://127.0.0.1:5000/CreateNewEmployee',JSON.parse(dataJson)).then((response)=>{
+    axios.post('https://bhargavasaikrishna.pythonanywhere.com/CreateNewEmployee',JSON.parse(dataJson)).then((response)=>{
         console.log(response.data);
     }).catch((error)=>{
         console.log(error)

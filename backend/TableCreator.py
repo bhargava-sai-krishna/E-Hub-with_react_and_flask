@@ -1,11 +1,16 @@
-import psycopg2
+import MySQLdb as mysql
 import s
 
 def createTable(data):
-    conn = psycopg2.connect(host=s.host, dbname=s.dbname, user=s.user, password=s.password, port=s.port)
-    conn.autocommit = True
+    conn = mysql.connect(
+        host=s.host,
+        user=s.user,
+        passwd=s.password,
+        db=s.dbname,
+    )
+    conn.autocommit(True)
     cur = conn.cursor()
-    cur.execute(f"insert into project values(\'{data['projectId']}\',\'{data['clientId']}\',\'{data['projectName']}\',\'{data['projectLog']}\',\'{data['domain']}\',\'{data['projectLeader']}\')")
-    cur.execute(f"insert into project_team values(\'{data['projectId']}\',\'{data['projectLeader']}\',\'{data['teammates']}\')")
+    cur.execute(f"INSERT INTO project (project_id, client_id, project_name, project_log, domain, project_leader) VALUES ('{data['projectId']}', '{data['clientId']}', '{data['projectName']}', '{data['projectLog']}', '{data['domain']}', '{data['projectLeader']}')")
+    cur.execute(f"INSERT INTO project_team (project_id, emp_id, role) VALUES ('{data['projectId']}', '{data['projectLeader']}', '{data['teammates']}')")
     cur.close()
     conn.close()

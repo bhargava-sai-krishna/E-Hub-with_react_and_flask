@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-import psycopg2
+import MySQLdb as mysql
 import dataSignup
 import getProjDetails
 import getProjDetailsAdmin
@@ -24,37 +24,46 @@ import createerOfEmployee
 app = Flask(__name__)
 CORS(app)
 
+@app.route("/success")
+def success():
+    return "this is success"
+
 @app.route('/signin', methods=['GET','POST'])
 def signin():
-    data=request.get_json()
+    data = request.get_json()
     userId = data['userId']
     password = data['password']
-    conn = psycopg2.connect(host=s.host, dbname=s.dbname, user=s.user, password=s.password, port=s.port)
+    conn = mysql.connect(
+        host=s.host,
+        user=s.user,
+        passwd=s.password,
+        db=s.dbname,
+    )
     cur = conn.cursor()
-    cur.execute("select * from Login")
-    rows= cur.fetchall()
-    flag="False"
-    name=""
+    cur.execute("SELECT * FROM login")
+    rows = cur.fetchall()
+    flag = "False"
+    name = ""
     for row in rows:
-        if((userId==row[0] and password==row[2])or(userId==row[3] and password==row[2])):
-            flag=row[0]
-            name=row[1]
+        if (userId == row[0] and password == row[2]) or (userId == row[3] and password == row[2]):
+            flag = row[0]
+            name = row[1]
     cur.close()
     conn.close()
-    data={
-        "flag" : flag,
-        "name" : name,
+    data = {
+        "flag": flag,
+        "name": name,
     }
     return data
 
-@app.route('/signup', methods=['GET','POST'])
+@app.route('/signup', methods=['GET', 'POST'])
 def signup():
-    creds=request.get_json()
+    creds = request.get_json()
     userName = creds['userName']
     password = creds['password']
-    email=creds['email']
-    company=creds['company']
-    dataSignup.addClient(userName,password,email,company)
+    email = creds['email']
+    company = creds['company']
+    dataSignup.addClient(userName, password, email, company)
     return 'done'
 
 @app.route('/getProject', methods=['GET','POST'])
@@ -63,6 +72,7 @@ def getProject():
   id=idJSON['userId']
   data = getProjDetails.getProjDets(id)
   return jsonify(data)
+
 
 
 @app.route('/getProjectForAdmin',methods=['GET','POST'])
@@ -168,5 +178,6 @@ def CreateEmployee():
     createerOfEmployee.fun(name,email,password,date,experience)
     return 'done'
 
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)

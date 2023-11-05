@@ -1,13 +1,18 @@
-import psycopg2
+import MySQLdb as mysql
 import s
 
 def fun(data):
-    conn = psycopg2.connect(host=s.host, dbname=s.dbname, user=s.user, password=s.password, port=s.port)
-    conn.autocommit = True
+    conn = mysql.connect(
+        host=s.host,
+        user=s.user,
+        passwd=s.password,
+        db=s.dbname,
+    )
+    conn.autocommit(True)
     cur = conn.cursor()
-    cur.execute(f"update project set project_leader=\'{data['editedProjectLeader']}\' where project_id=\'{data['project_id']}\'")
-    cur.execute(f"update project set project_log=\'{data['editedLog']}\' where project_id=\'{data['project_id']}\'")
-    cur.execute(f"update project_team set project_leader=\'{data['editedProjectLeader']}\' where project_id=\'{data['project_id']}\'")
-    cur.execute(f"update project_team set members=\'{data['membersString']}\' where project_id=\'{data['project_id']}\'")
+    cur.execute(f"UPDATE project SET project_leader = '{data['editedProjectLeader']}' WHERE project_id = '{data['project_id']}'")
+    cur.execute(f"UPDATE project SET project_log = '{data['editedLog']}' WHERE project_id = '{data['project_id']}'")
+    cur.execute(f"UPDATE project_team SET project_leader = '{data['editedProjectLeader']}' WHERE project_id = '{data['project_id']}'")
+    cur.execute(f"UPDATE project_team SET members = '{data['membersString']}' WHERE project_id = '{data['project_id']}'")
     cur.close()
     conn.close()

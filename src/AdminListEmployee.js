@@ -33,7 +33,7 @@ function AdminListEmployee() {
 
   return (
     <div>
-      <button onClick={handleAddEmployee}>Add Employee</button>
+      <button onClick={handleAddEmployee}><span></span>Add Employee</button>
       {showCreateEmployee && <CreateEmployee />}
       {EmployeeList && (
       <table>
@@ -50,7 +50,7 @@ function AdminListEmployee() {
                 <td>{row.emp_id}</td>
                 <td>{row.name}</td>
                 <td>{row.email}</td>
-                <td><button onClick={()=>handleEdit(row)}>Remove</button></td>
+                <td><button onClick={()=>handleEdit(row)}><span></span>Remove</button></td>
               </tr>
             ))
           }

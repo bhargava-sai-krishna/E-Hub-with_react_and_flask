@@ -91,7 +91,7 @@ function AdminListProjects(props) {
                 <CreateForm />
             ) : (
                 <>
-                    <button onClick={toggleCreateForm}>Add project</button>
+                    <button onClick={toggleCreateForm}><span></span>Add project</button>
                     {projectData && (
                         <table>
                             <thead>
@@ -117,7 +117,7 @@ function AdminListProjects(props) {
                                         <td>{row.domain}</td>
                                         <td>{row.members}</td>
                                         <td>
-                                            <button onClick={() => handleEdit(row)}>edit</button>
+                                            <button onClick={() => handleEdit(row)}><span></span>edit</button>
                                         </td>
                                     </tr>
                                 ))}

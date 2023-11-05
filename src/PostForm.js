@@ -32,6 +32,7 @@ class PostForm extends Component {
     e.preventDefault();
     console.log(this.state);
     const stateJson = JSON.stringify(this.state);
+    console.log(JSON.parse(stateJson))
     axios
       .post('http://127.0.0.1:5000/signin', JSON.parse(stateJson))
       .then((response) => {

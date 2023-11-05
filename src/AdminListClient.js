@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import './TableStyler.css'
 
 function AdminListClient(props) {
     const [AdmId] = useState(props.userId);
