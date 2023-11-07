@@ -56,7 +56,7 @@ function AdminListProjects(props) {
           membersString:membersString
         }
         const updatesJSON=JSON.stringify(updates);
-        axios.post('/UpdateProjectData',JSON.parse(updatesJSON)).then((response)=>{
+        axios.post('https://bhargavasaikrishna.pythonanywhere.com/UpdateProjectData',JSON.parse(updatesJSON)).then((response)=>{
           console.log(response.data)
         }).catch((error)=>{
           console.log(error)
