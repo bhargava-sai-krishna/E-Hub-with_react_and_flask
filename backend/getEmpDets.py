@@ -11,7 +11,7 @@ def fun():
     )
     conn.autocommit(True)
     cur = conn.cursor()
-    cur.execute("select emp_id,name,email from employee natural join person where employee.emp_id=person.id")
+    cur.execute("select emp_id,name,email,role from employee natural join person where employee.emp_id=person.id")
     rows = cur.fetchall()
     column_names = [desc[0] for desc in cur.description]
     dict_rows = [dict(zip(column_names, row)) for row in rows]

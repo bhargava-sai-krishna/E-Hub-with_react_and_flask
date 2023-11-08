@@ -20,12 +20,28 @@ function AdminListEmployee() {
 
   const handleEdit = (row) => {
     console.log(row)
-    axios.post('/RemoveEmployee',JSON.parse(JSON.stringify(row))).then((response)=>{
+    axios.post('https://bhargavasaikrishna.pythonanywhere.com/RemoveEmployee',JSON.parse(JSON.stringify(row))).then((response)=>{
       console.log(response.data)
     }).catch((error)=>{
       console.log(error);
     })
   };
+
+  const handel2=(row)=>{
+    axios.post('https://bhargavasaikrishna.pythonanywhere.com/PremoteEmployee',JSON.parse(JSON.stringify(row))).then((responce)=>{
+      console.log(responce.data)
+    }).catch((error)=>{
+      console.log(error)
+    })
+  }
+
+  const handel3=(row)=>{
+    axios.post('https://bhargavasaikrishna.pythonanywhere.com/demoteEmployee',JSON.parse(JSON.stringify(row))).then((responce)=>{
+      console.log(responce.data)
+    }).catch((error)=>{
+      console.log(error)
+    })
+  }
 
   const handleAddEmployee = () => {
     setShowCreateEmployee(true);
@@ -41,6 +57,7 @@ function AdminListEmployee() {
           <th>Employee Id</th>
           <th>Name</th>
           <th>Email</th>
+          <th>role</th>
           <th>Action</th>
         </thead>
         <tbody>
@@ -50,7 +67,9 @@ function AdminListEmployee() {
                 <td>{row.emp_id}</td>
                 <td>{row.name}</td>
                 <td>{row.email}</td>
+                <td>{row.role}</td>
                 <td><button onClick={()=>handleEdit(row)}><span></span>Remove</button></td>
+                {(row.role==='crew')?<td><button onClick={()=>handel2(row)}>promote</button></td>:<td><button onClick={()=>handel3(row)}>demote</button></td>}
               </tr>
             ))
           }

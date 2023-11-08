@@ -20,6 +20,8 @@ import UpdaterProjectIntDB
 import getEmpDets
 import IWillRemoveThisEmployee
 import createerOfEmployee
+import HeIsPromoted
+import HeIsdemoted
 
 app = Flask(__name__)
 CORS(app)
@@ -166,6 +168,21 @@ def RemoveThisEmployee():
     name=dataJson['name']
     IWillRemoveThisEmployee.fun(emp_id,name,email)
     return 'done'
+
+@app.route('/PremoteEmployee', methods=['GET', 'POST'])
+def PromoteHim():
+    dataJson = request.get_json()
+    emp_id = dataJson['emp_id']
+    HeIsPromoted.fun(emp_id)
+    return 'done'
+
+@app.route('/demoteEmployee', methods=['GET', 'POST'])
+def demoteHim():
+    dataJson = request.get_json()
+    emp_id = dataJson['emp_id']
+    HeIsdemoted.fun(emp_id)
+    return 'done'
+
 
 @app.route('/CreateNewEmployee',methods=['GET','POST'])
 def CreateEmployee():
