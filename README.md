@@ -7,3 +7,6 @@ https://github.com/bhargava-sai-krishna/E-Hub-with_react_and_flask/assets/100348
 ## Please consider watching this PPT for better understanding
 
 [E-Hub website.pptx](https://github.com/bhargava-sai-krishna/E-Hub-with_react_and_flask/files/13196292/E-Hub.website.pptx)
+
+
+for working of website create a s.py file with the parameters host, dbname ,user ,password
