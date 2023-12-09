@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PostForm from './PostForm';
 import ListProjects from './ListProjects';
 import FormProject from './FormProject';
+import './TableStyler.css';
 
 class Client extends Component {
   constructor(props) {
@@ -40,13 +41,13 @@ class Client extends Component {
     const { loggedIn, userId ,name, view_project, request_project } = this.state;
 
     return (
-      <div>
+      <div className='bdy'>
         {loggedIn ? (
           <div>
             <h1>Welcome {userId} {name}</h1>
-            <button onClick={this.project_view_handler}>view projects</button>
-            <button onClick={this.request_project_handler}>request projects</button>
-            <button onClick={this.logouter}>Logout</button>
+            <button className='btn' onClick={this.project_view_handler}>view projects</button>
+            <button className='btn' onClick={this.request_project_handler}>request projects</button>
+            <button className='btn' onClick={this.logouter}>Logout</button>
             {view_project && <ListProjects userId={userId}/> }
             {request_project && <FormProject userId={userId}/>}
           </div>

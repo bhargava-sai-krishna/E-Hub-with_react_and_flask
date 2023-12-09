@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import './TableStyler.css';
 
 const ListProjects = (props) => {
   const [userId, setUserId] = useState(props.userId);
@@ -29,7 +30,7 @@ const ListProjects = (props) => {
     <div>
       {projectData && (
         <table>
-          <thead>
+          <thead className='header'>
             <tr>
               <th>Project_id</th>
               <th>Client_id</th>

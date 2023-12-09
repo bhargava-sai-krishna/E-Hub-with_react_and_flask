@@ -23,7 +23,7 @@ function AdminListClient(props) {
             {
                 ClientData && (
                     <table>
-                        <thead>
+                        <thead className='header'>
                             <tr>
                                 <th>Client_id</th>
                                 <th>Company</th>

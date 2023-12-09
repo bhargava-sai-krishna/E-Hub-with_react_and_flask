@@ -1,12 +1,15 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import CreateForm from './CreateForm';
+import './TableStyler.css';
+import './FormStyle.css'
 
 function AdminListProjects(props) {
     const [userId, setUserId] = useState(props.userId);
     const [projectData, setProjectData] = useState(null);
     const [selectedProject, setSelectedProject] = useState(null);
     const [showCreateForm, setShowCreateForm] = useState(false);
+    const [showEditForm, setShowEditForm] = useState(false);
     const [EmployeeList, setEmployeeData] = useState([]);
     const [editedMembers, setEditedMembers] = useState([]);
     const [editedLog, setEditedLog] = useState("");
@@ -33,6 +36,7 @@ function AdminListProjects(props) {
     const getEmployeeList = () => {
         axios.post('https://bhargavasaikrishna.pythonanywhere.com/getEmployeeListDropDown')
             .then((response) => {
+                console.log(response.data);
                 setEmployeeData(JSON.parse(response.data));
             });
     }
@@ -48,19 +52,32 @@ function AdminListProjects(props) {
         console.log("Updated project leader:", editedProjectLeader);
         console.log("Updated project log:", editedLog);
         console.log("Updated project members:", membersString);
-        const updates={
-          project_id:selectedProject.project_id,
-          client_id:selectedProject.client_id,
-          editedProjectLeader:editedProjectLeader,
-          editedLog:editedLog,
-          membersString:membersString
+        const updates = {
+            project_id: selectedProject.project_id,
+            client_id: selectedProject.client_id,
+            editedProjectLeader: editedProjectLeader,
+            editedLog: editedLog,
+            membersString: membersString
         }
-        const updatesJSON=JSON.stringify(updates);
-        axios.post('https://bhargavasaikrishna.pythonanywhere.com/UpdateProjectData',JSON.parse(updatesJSON)).then((response)=>{
-          console.log(response.data)
-        }).catch((error)=>{
-          console.log(error)
-        })
+        const updatesJSON = JSON.stringify(updates);
+        
+        axios.post('https://bhargavasaikrishna.pythonanywhere.com/UpdateProjectData', JSON.parse(updatesJSON))
+            .then((response) => {
+                console.log(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        axios.post('https://bhargavasaikrishna.pythonanywhere.com/getProjectForAdmin', { userId })
+            .then((response) => {
+                setProjectData(JSON.parse(response.data));
+                console.log(response.data)
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+        
+        setShowEditForm(false);
     };
 
     const handleTeammateChange = (index, value) => {
@@ -83,6 +100,7 @@ function AdminListProjects(props) {
         setEditedLog(row.project_log);
         setDropdownCount(row.members.split(',').length || 1);
         setEditedProjectLeader(row.project_leader);
+        setShowEditForm(true);
     };
 
     return (
@@ -91,10 +109,12 @@ function AdminListProjects(props) {
                 <CreateForm />
             ) : (
                 <>
-                    <button onClick={toggleCreateForm}><span></span>Add project</button>
-                    {projectData && (
+                    <button className='btn' onClick={toggleCreateForm}><span></span>Add project</button>
+                    <br/>
+                    <br/>
+                    {projectData && !showEditForm && (
                         <table>
-                            <thead>
+                            <thead className='header'>
                                 <tr>
                                     <th>Project_id</th>
                                     <th>Project_leader</th>
@@ -117,23 +137,23 @@ function AdminListProjects(props) {
                                         <td>{row.domain}</td>
                                         <td>{row.members}</td>
                                         <td>
-                                            <button onClick={() => handleEdit(row)}><span></span>edit</button>
+                                            <button className='btn' onClick={() => handleEdit(row)}>edit</button>
                                         </td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
                     )}
-                    {selectedProject && (
-                        <div>
+                    {selectedProject && showEditForm && (
+                        <div className='frm'>
                             <h3>Edit Project:</h3>
                             <p><strong>Project ID:</strong> {selectedProject.project_id}</p>
                             <p><strong>Client ID:</strong> {selectedProject.client_id}</p>
 
                             <div>
                                 <p><strong>Project Leader:</strong></p>
-                                <select 
-                                    value={editedProjectLeader} 
+                                <select
+                                    value={editedProjectLeader}
                                     onChange={(e) => setEditedProjectLeader(e.target.value)}
                                 >
                                     <option value="" disabled>Select Project Leader</option>
@@ -153,13 +173,13 @@ function AdminListProjects(props) {
                             {[...Array(dropdownCount)].map((_, index) => (
                                 <div key={index}>
                                     <p>Member {index + 1}</p>
-                                    <select 
-                                        value={editedMembers[index] || ""} 
+                                    <select
+                                        value={editedMembers[index] || ""}
                                         onChange={(e) => handleTeammateChange(index, e.target.value)}
                                     >
                                         <option value="" disabled>Select Member</option>
-                                        {EmployeeList.map(employee => (
-                                            <option key={employee} value={employee}>
+                                        {EmployeeList.map((employee, index) => (
+                                            <option key={index} value={employee}>
                                                 {employee}
                                             </option>
                                         ))}
@@ -167,8 +187,8 @@ function AdminListProjects(props) {
                                 </div>
                             ))}
 
-                            <button type="button" onClick={() => setDropdownCount(prevCount => prevCount + 1)}>Add Member</button>
-                            <button onClick={commitChanges}>Commit Changes</button>
+                            <button className='btn' type="button" onClick={() => setDropdownCount(prevCount => prevCount + 1)}>Add Member</button>
+                            <button className='btn' onClick={commitChanges}>Commit Changes</button>
                         </div>
                     )}
                 </>

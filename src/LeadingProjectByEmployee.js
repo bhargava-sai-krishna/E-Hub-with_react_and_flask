@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './TableStyler.css';
 
 function LeadingProjectByEmployee(props) {
     const [EmpId] = useState(props.userId);
@@ -21,7 +22,7 @@ function LeadingProjectByEmployee(props) {
     <div>
       {projectData && (
                 <table>
-                    <thead>
+                    <thead className='header'>
                         <tr>
                             <th>Project_id</th>
                             <th>Project_leader</th>

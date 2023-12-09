@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './TableStyler.css';
+import './FormStyle.css'
 
 
 const FormProject = (props) => {
@@ -42,7 +44,7 @@ const FormProject = (props) => {
 
 
   return (
-    <div>
+    <div className='frm'>
       {message}
       <form onSubmit={submitHandler}>
           <div>
@@ -69,9 +71,10 @@ const FormProject = (props) => {
             <p>domain</p>
             <input type='text' name='domain' value={domain} onChange={(e) => setDomain(e.target.value)} />
           </div>
+          <br/>
 
           <div>
-            <button type='submit'>submit</button>
+            <button className='btn' type='submit'>submit</button>
           </div>
       </form>
     </div>

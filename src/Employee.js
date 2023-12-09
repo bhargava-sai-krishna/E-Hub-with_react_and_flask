@@ -3,6 +3,7 @@ import PostForm from './PostForm';
 import ViewprojectEmployee from './ViewprojectEmployee';
 import ProjectStatus from './ProjectStatus';
 import LeadingProjectByEmployee from './LeadingProjectByEmployee';
+import './TableStyler.css';
 
 class Employee extends Component {
   constructor(props) {
@@ -53,10 +54,10 @@ class Employee extends Component {
           <div>
             <div>
               <h1>Welcome {userId} {name}</h1>
-              <button onClick={this.project_view_handler}>view projects</button>
-              <button onClick={this.project_status_handler}>project status</button>
-              <button onClick={this.Leader_project_handler}>Leading projects</button>
-              <button onClick={this.logouter}>Logout</button>
+              <button className='btn' onClick={this.project_view_handler}>view projects</button>
+              <button className='btn' onClick={this.project_status_handler}>project status</button>
+              <button className='btn' onClick={this.Leader_project_handler}>Leading projects</button>
+              <button className='btn' onClick={this.logouter}>Logout</button>
               {view_project && <ViewprojectEmployee userId={userId}/> }
               {project_status && <ProjectStatus userId={userId}/>}
               {LeadingProjects && <LeadingProjectByEmployee userId={userId}/>}

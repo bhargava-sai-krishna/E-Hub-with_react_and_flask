@@ -4,6 +4,7 @@ import AdminListProjects from './AdminListProjects';
 import AdminListClient from './AdminListClient';
 import AdminListEmployee from './AdminListEmployee';
 import TeamManager from './TeamManager';
+import './TableStyler.css';
 
 class Admin extends Component {
   constructor(props) {
@@ -67,11 +68,11 @@ class Admin extends Component {
           {loggedIn?(
             <div className='AdmBdy'>
               <h1>Welcome {userId} {name}</h1>
-              <button onClick={this.employee_view_handler}><span></span>Manage Employee</button>
-              <button onClick={this.client_view_handler}><span></span>Manage Client</button>
-              <button onClick={this.project_view_handler}><span></span>Manage Project</button>
-              <button onClick={this.Team_manager_handler}><span></span>Manage Teams</button>
-              <button onClick={this.logouter}><span></span>Logout</button>
+              <button className='btn' onClick={this.employee_view_handler}><span></span>Manage Employee</button>
+              <button className='btn' onClick={this.client_view_handler}><span></span>Manage Client</button>
+              <button className='btn' onClick={this.project_view_handler}><span></span>Manage Project</button>
+              <button className='btn' onClick={this.Team_manager_handler}><span></span>Manage Teams</button>
+              <button className='btn' onClick={this.logouter}><span></span>Logout</button>
               {view_project && <AdminListProjects userId={userId}/> }
               {view_client && <AdminListClient userId={userId}/> }
               {view_employee && <AdminListEmployee userId={userId}/> }

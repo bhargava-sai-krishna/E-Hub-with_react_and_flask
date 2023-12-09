@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import './FormStyle.css'
 
 function CreateEmployee() {
   const [name, setName] = useState('');
@@ -33,7 +34,7 @@ function CreateEmployee() {
   };
 
   return (
-    <div>
+    <div className='frm'>
       <form onSubmit={submitHandler}>
         <p>Name:</p>
         <input type='text' value={name} onChange={(e) => setName(e.target.value)} />
@@ -45,8 +46,8 @@ function CreateEmployee() {
         <input type='date' value={dateOfJoin} onChange={(e) => setDateOfJoin(e.target.value)} />
         <p>Years of Experience</p>
         <input type='text' value={yearsOfExperience} onChange={(e) => setYearsOfExperience(e.target.value)} />
-        <br></br>
-        <button type='submit'>Submit</button>
+        <br/>
+        <button className='btn' type='submit'>Submit</button>
       </form>
     </div>
   );
